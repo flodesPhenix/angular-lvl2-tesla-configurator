@@ -1,0 +1,5 @@
+<mat-button-toggle-group name="stepSelection" [(ngModel)]="stepSelected" aria-label="Step selection">
+  @for (step of steps; track $index) {
+    <mat-button-toggle value="{{$index}}" (click)="onSelectedStep()">{{ step }}</mat-button-toggle>
+  }
+</mat-button-toggle-group>
