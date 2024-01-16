@@ -1,7 +1,7 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
-import { setupWorker } from 'msw/browser';
+import {bootstrapApplication} from '@angular/platform-browser';
+import {appConfig} from './app/app.config';
+import {AppComponent} from './app/app.component';
+import {setupWorker} from 'msw/browser';
 import {http, HttpResponse} from 'msw';
 
 bootstrapApplication(AppComponent, appConfig)
@@ -9,7 +9,7 @@ bootstrapApplication(AppComponent, appConfig)
 
 
 const handlers = [
-  http.get('/options/:id', ({ params }) => {
+  http.get('/options/:id', ({params}) => {
 
     const options = {
       "S": {
@@ -28,7 +28,7 @@ const handlers = [
         towHitch: true, // costs $1,000
         yoke: true, // costs $1,000
       },
-      "C" : {
+      "C": {
         configs: [
           {id: 1, description: "Rear Wheel Drive", range: 250, speed: 110, price: 60990},
           {id: 2, description: "Dual Motor All-Wheel Drive", range: 340, speed: 112, price: 79990},
@@ -59,9 +59,10 @@ const handlers = [
     // @ts-ignore
     return HttpResponse.json(options[params.id.toUpperCase()]);
   }),
-  http.get('/models', ({ request, params, cookies }) => {
+  http.get('/models', ({request, params, cookies}) => {
     return HttpResponse.json([
-      { code: "S",
+      {
+        code: "S",
         description: "Model S",
         colors: [
           {code: "white", description: "Pearl White Multi-Coat", price: 0},
@@ -71,7 +72,8 @@ const handlers = [
           {code: "red", description: "Ultra Red", price: 0}
         ]
       },
-      { code: "X",
+      {
+        code: "X",
         description: "Model X",
         colors: [
           {code: "white", description: "Pearl White Multi-Coat", price: 0},
@@ -81,7 +83,8 @@ const handlers = [
           {code: "red", description: "Ultra Red", price: 0}
         ]
       },
-      { code: "C",
+      {
+        code: "C",
         description: "Cybertruck",
         colors: [
           {code: "grey", description: "Stainless Steel", price: 0},
@@ -89,7 +92,8 @@ const handlers = [
           {code: "white", description: "Satin White", price: 6500}
         ]
       },
-      { code: "3",
+      {
+        code: "3",
         description: "Model 3",
         colors: [
           {code: "white", description: "Pearl White Multi-Coat", price: 1000},
@@ -99,7 +103,8 @@ const handlers = [
           {code: "red", description: "Red Multi-Coat", price: 2000}
         ]
       },
-      { code: "Y",
+      {
+        code: "Y",
         description: "Model Y",
         colors: [
           {code: "white", description: "Pearl White Multi-Coat", price: 1000},
