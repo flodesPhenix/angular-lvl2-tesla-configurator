@@ -3,20 +3,21 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {FormsModule} from "@angular/forms";
 import {TeslaConfiguratorService} from "../services/tesla-configurator.service";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {RouterLink, RouterLinkActive} from "@angular/router";
 
 @Component({
   selector: 'app-configurator-step',
   standalone: true,
   imports: [
     MatButtonToggleModule,
-    FormsModule
+    FormsModule,
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './configurator-step.component.html',
   styleUrl: './configurator-step.component.scss'
 })
 export class ConfiguratorStepComponent implements OnInit {
-
-  stepSelected?: number;
 
   step2Disabled: boolean = true;
   step3Disabled: boolean = true;
@@ -25,17 +26,35 @@ export class ConfiguratorStepComponent implements OnInit {
   private teslaConfiguratorService: TeslaConfiguratorService = inject(TeslaConfiguratorService);
 
   ngOnInit(): void {
-    this.teslaConfiguratorService.getSelectedColor()
+    this.step2Disabled = this.teslaConfiguratorService.getSelectedColor() == undefined;
+    this.teslaConfiguratorService.getStepToActivated()
+      .pipe(takeUntilDestroyed(this.destroyedRef))
+      .subscribe(stepToActivate => {
+        switch (stepToActivate) {
+          case 2:
+            this.step2Disabled = false;
+            this.step3Disabled = true;
+            break;
+          case 3:
+            this.step2Disabled = false;
+            this.step3Disabled = false;
+            break;
+          default:
+            this.step2Disabled = true;
+            this.step3Disabled = true;
+            break;
+        }
+      })
+
+    this.teslaConfiguratorService.getSelectedOption()
       .pipe(takeUntilDestroyed(this.destroyedRef))
       .subscribe(() => {
-        this.step2Disabled = false;
+        this.step3Disabled = false;
       });
   }
 
   onSelectedStep(): void {
-    if (this.stepSelected) {
-      this.teslaConfiguratorService.getStepToActivated().next(this.stepSelected);
-    }
+
   }
 
 }

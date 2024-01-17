@@ -1,31 +1,30 @@
-@if (isVisible) {
-  <h1>Step 1 : choose your model and color</h1>
-  <div class="form">
-    <mat-form-field>
-      <mat-label>Model</mat-label>
-      <mat-select (selectionChange)="chooseAModel($event)">
+<h1>Step 1 : choose your model and color</h1>
+<div class="form">
+  <div class="model">
+    <div class="libelle">Model
+      <select name="model" #model (change)="chooseAModel(model.value)">
+        <option>Choose...</option>
         @for (model of models; track model) {
-          <mat-option value="{{model.code}}">{{ model.description }}</mat-option>
+          <option [value]="model.code">{{ model.description }}</option>
         }
-      </mat-select>
-    </mat-form-field>
+      </select>
+    </div>
     @if (selectedModel) {
-      <mat-form-field>
-        <mat-label>Color</mat-label>
-        <mat-select [value]="selectedColorCode" (selectionChange)="chooseAColor($event)">
+      <div class="libelle">Color
+        <select name="model" #color (change)="chooseAColor(color.value)">
           @for (color of selectedModel.colors; track color) {
-            <mat-option [value]="color.code">{{ color.description }}</mat-option>
+            <option [value]="color.code">{{ color.description }}</option>
           }
-        </mat-select>
-      </mat-form-field>
+        </select>
+      </div>
     }
   </div>
-  @if (selectedModel && selectedColor) {
-    <div class="img">
-      <img ngSrc="assets/tesla/models/{{selectedModel.code}}/{{selectedColor.code}}.jpg"
-           alt="{{selectedModel.description}} - {{selectedColor.description}}"
-           title="{{selectedModel.description}} - {{selectedColor.description}}" height="738" width="1330"
-           priority="1"/>
-    </div>
-  }
+</div>
+@if (selectedModel && selectedColor) {
+  <div class="img">
+    <img ngSrc="assets/tesla/models/{{selectedModel.code}}/{{selectedColor.code}}.jpg"
+         alt="{{selectedModel.description}} - {{selectedColor.description}}"
+         title="{{selectedModel.description}} - {{selectedColor.description}}" height="738" width="1330"
+         priority="1"/>
+  </div>
 }

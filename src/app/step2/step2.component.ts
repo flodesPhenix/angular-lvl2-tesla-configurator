@@ -11,6 +11,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {TeslaOptionConfig} from "../models/tesla-option-config";
 import {CurrencyPipe} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-step2',
@@ -28,42 +29,35 @@ import {FormsModule} from "@angular/forms";
 })
 export class Step2Component implements OnInit {
 
-  isVisible: boolean = false;
-
   selectedModel: TeslaModel | undefined;
   options: TeslaOption | undefined;
 
   selectedConfig: TeslaOptionConfig | undefined;
 
   private destroyedRef: DestroyRef = inject(DestroyRef);
+  private router: Router = inject(Router);
   private teslaConfiguratorService: TeslaConfiguratorService = inject(TeslaConfiguratorService);
   private teslaInfosService: TeslaInfosService = inject(TeslaInfosService);
 
   ngOnInit(): void {
-    this.teslaConfiguratorService.getStepToActivated()
-      .pipe(takeUntilDestroyed(this.destroyedRef))
-      .subscribe(stepToActivated => {
-        this.isVisible = stepToActivated == 2;
-      });
-
-    this.teslaConfiguratorService.getSelectedModel().pipe(takeUntilDestroyed(this.destroyedRef))
-      .subscribe(model => {
-        if (model != this.selectedModel) {
-          this.selectedModel = model;
-          this.selectedConfig = undefined;
-
-          this.teslaInfosService.getOptionsById(this.selectedModel.code)
-            .pipe(takeUntilDestroyed(this.destroyedRef))
-            .subscribe(options => {
-              this.options = options;
-            });
-        }
-      });
+    this.selectedModel = this.teslaConfiguratorService.getSelectedModel();
+    if (this.selectedModel) {
+      this.teslaInfosService.getOptionsById(this.selectedModel.code)
+        .pipe(takeUntilDestroyed(this.destroyedRef))
+        .subscribe(options => {
+          this.options = options;
+        });
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   chooseAConfig(modelSelected: MatSelectChange): void {
     if (this.options) {
       this.selectedConfig = this.options.configs.find(config => config.id == modelSelected.value);
+      if (this.selectedConfig) {
+        this.teslaConfiguratorService.getSelectedOption().next(this.selectedConfig);
+      }
     }
   }
 }

@@ -1,5 +1,7 @@
-<mat-button-toggle-group name="stepSelection" [(ngModel)]="stepSelected" aria-label="Step selection">
-  <mat-button-toggle value="1" (click)="onSelectedStep()">Step 1</mat-button-toggle>
-  <mat-button-toggle value="2" (click)="onSelectedStep()" [disabled]="step2Disabled">Step 2</mat-button-toggle>
-  <mat-button-toggle value="3" (click)="onSelectedStep()" [disabled]="step3Disabled">Step 3</mat-button-toggle>
-</mat-button-toggle-group>
+<div class="configurator-step">
+  <button id="step1" routerLink="/step1" routerLinkActive="active" ariaCurrentWhenActive="page">Step 1</button>
+  <button id="step2" routerLink="/step2" [disabled]="step2Disabled" routerLinkActive="active" ariaCurrentWhenActive="page">Step 2
+  </button>
+  <button id="step3" routerLink="/step3" [disabled]="step3Disabled" routerLinkActive="active" ariaCurrentWhenActive="page">Step 3
+  </button>
+</div>
