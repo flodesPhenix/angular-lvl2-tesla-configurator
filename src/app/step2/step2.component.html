@@ -1,1 +1,29 @@
-<p>step2 works!</p>
+@if (isVisible) {
+  <h1>Step 2 : select your config and options</h1>
+  @if (options) {
+    <div class="form">
+      <div class="config">
+        <mat-form-field>
+          <mat-label>Config</mat-label>
+          <mat-select (selectionChange)="chooseAConfig($event)">
+            @for (config of options.configs; track config) {
+              <mat-option value="{{config.id}}">{{ config.description }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+      @if (selectedConfig) {
+        <div class="infoConfig">
+          Range : {{ selectedConfig.range }} miles - Max speed : {{ selectedConfig.speed }} - Cost
+          : {{ selectedConfig.price | currency }}
+        </div>
+      }
+      <div class="towHitch">
+        <mat-checkbox [(ngModel)]="options.towHitch">Too hitch ?</mat-checkbox>
+      </div>
+      <div class="yoke">
+        <mat-checkbox [(ngModel)]="options.yoke">Yoke steering wheel ?</mat-checkbox>
+      </div>
+    </div>
+  }
+}
