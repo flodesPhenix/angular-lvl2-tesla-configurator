@@ -24,6 +24,7 @@ export class Step1Component implements OnInit {
   selectedModel: TeslaModel | undefined = undefined;
   selectedModelCode: string | undefined = undefined;
   selectedColor: TeslaModelColor | undefined = undefined;
+  selectedColorCode: string | undefined = undefined;
 
   private destroyedRef: DestroyRef = inject(DestroyRef);
   private teslaInfosService: TeslaInfosService = inject(TeslaInfosService);
@@ -38,7 +39,11 @@ export class Step1Component implements OnInit {
     if (this.selectedModel) {
       this.selectedModelCode = this.selectedModel.code;
     }
+
     this.selectedColor = this.teslaConfiguratorService.getSelectedColor();
+    if (this.selectedColor) {
+      this.selectedColorCode = this.selectedColor.code;
+    }
   }
 
   chooseAModel(modelSelected: string): void {
@@ -48,6 +53,7 @@ export class Step1Component implements OnInit {
         this.teslaConfiguratorService.setSelectedModel(this.selectedModel);
 
         this.selectedColor = this.selectedModel.colors[0];
+        this.selectedColorCode = this.selectedColor.code;
         this.teslaConfiguratorService.getStepToActivated().next(2);
       }
     }

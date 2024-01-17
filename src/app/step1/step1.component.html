@@ -11,7 +11,7 @@
     </div>
     @if (selectedModel) {
       <div class="libelle">Color
-        <select name="color" #color (change)="chooseAColor(color.value)">
+        <select name="color" #color (change)="chooseAColor(color.value)" [(ngModel)]="selectedColorCode">
           @for (color of selectedModel.colors; track color) {
             <option [value]="color.code">{{ color.description }}</option>
           }
