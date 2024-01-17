@@ -44,17 +44,7 @@ export class ConfiguratorStepComponent implements OnInit {
             this.step3Disabled = true;
             break;
         }
-      })
-
-    this.teslaConfiguratorService.getSelectedOption()
-      .pipe(takeUntilDestroyed(this.destroyedRef))
-      .subscribe(() => {
-        this.step3Disabled = false;
       });
-  }
-
-  onSelectedStep(): void {
-
   }
 
 }

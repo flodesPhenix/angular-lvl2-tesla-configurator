@@ -11,16 +11,10 @@ import {TeslaConfiguratorService} from "../services/tesla-configurator.service";
 })
 export class Step3Component implements OnInit {
 
-  isVisible: boolean = false;
-
   private destroyedRef: DestroyRef = inject(DestroyRef);
   private teslaConfiguratorService: TeslaConfiguratorService = inject(TeslaConfiguratorService);
 
   ngOnInit(): void {
-    this.teslaConfiguratorService.getStepToActivated()
-      .pipe(takeUntilDestroyed(this.destroyedRef))
-      .subscribe(stepToActivated => {
-        this.isVisible = stepToActivated == 3;
-      });
+
   }
 }

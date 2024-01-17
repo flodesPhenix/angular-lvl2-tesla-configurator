@@ -11,10 +11,9 @@ export class TeslaConfiguratorService {
 
   private selectedModel: TeslaModel | undefined = undefined;
   private selectedColor: TeslaModelColor | undefined = undefined;
+  private selectedOption: TeslaOptionConfig | undefined = undefined;
 
   private stepToActivated: Subject<number> = new Subject<number>();
-
-  private selectedOption: Subject<TeslaOptionConfig> = new Subject<TeslaOptionConfig>();
 
   public getStepToActivated(): Subject<number> {
     return this.stepToActivated;
@@ -36,7 +35,11 @@ export class TeslaConfiguratorService {
     this.selectedColor = selectedColor;
   }
 
-  public getSelectedOption(): Subject<TeslaOptionConfig> {
+  public getSelectedOption(): TeslaOptionConfig | undefined {
     return this.selectedOption;
+  }
+
+  public setSelectedOption(selectedOption: TeslaOptionConfig): void {
+    this.selectedOption = selectedOption;
   }
 }

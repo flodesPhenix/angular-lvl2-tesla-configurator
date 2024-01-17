@@ -2,14 +2,12 @@
 @if (options) {
   <div class="form">
     <div class="config">
-      <mat-form-field>
-        <mat-label>Config</mat-label>
-        <mat-select (selectionChange)="chooseAConfig($event)">
-          @for (config of options.configs; track config) {
-            <mat-option value="{{config.id}}">{{ config.description }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
+      <select name="config" #config (change)="chooseAConfig(config.value)" [(ngModel)]="selectedConfigId">
+        <option>Choose...</option>
+        @for (config of options.configs; track config) {
+          <option [value]="config.id">{{ config.description }}</option>
+        }
+      </select>
     </div>
     @if (selectedConfig) {
       <div class="infoConfig">
@@ -17,11 +15,16 @@
         : {{ selectedConfig.price | currency }}
       </div>
     }
-    <div class="towHitch">
-      <mat-checkbox [(ngModel)]="options.towHitch">Too hitch ?</mat-checkbox>
-    </div>
-    <div class="yoke">
-      <mat-checkbox [(ngModel)]="options.yoke">Yoke steering wheel ?</mat-checkbox>
-    </div>
+    @if (options.towHitch) {
+      <div class="towHitch">
+        <input type="checkbox" id="towHitch"/> Too hitch ?
+<!--        <input type="checkbox" id="towHitch" [(ngModel)]="options.towHitch"/> Too hitch ?-->
+      </div>
+    }
+    @if (options.yoke) {
+      <div class="yoke">
+        <input type="checkbox" id="yoke"/> Yoke steering wheel ?
+      </div>
+    }
   </div>
 }
