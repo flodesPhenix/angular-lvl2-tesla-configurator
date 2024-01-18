@@ -1,5 +1,4 @@
 import {Component, DestroyRef, inject, OnInit} from '@angular/core';
-import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {FormsModule} from "@angular/forms";
 import {TeslaConfiguratorService} from "../services/tesla-configurator.service";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
@@ -9,7 +8,6 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
   selector: 'app-configurator-step',
   standalone: true,
   imports: [
-    MatButtonToggleModule,
     FormsModule,
     RouterLink,
     RouterLinkActive
