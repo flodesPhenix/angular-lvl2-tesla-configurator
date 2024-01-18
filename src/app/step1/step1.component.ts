@@ -54,6 +54,7 @@ export class Step1Component implements OnInit {
 
         this.selectedColor = this.selectedModel.colors[0];
         this.selectedColorCode = this.selectedColor.code;
+        this.teslaConfiguratorService.setSelectedColor(this.selectedColor);
         this.teslaConfiguratorService.getStepToActivated().next(2);
       }
     }

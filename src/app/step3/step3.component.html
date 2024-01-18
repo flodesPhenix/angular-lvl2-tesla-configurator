@@ -1,1 +1,12 @@
 <h1>Step 3 : Summary</h1>
+<div class="teslaModel">Your Tesla {{ selectedModel?.description }}</div>
+<div class="config">{{ selectedConfig?.description }} : {{ selectedConfig?.price | currency }}</div>
+<div class="infoConfig">Range : {{ selectedConfig?.range }} miles - Max speed : {{ selectedConfig?.speed }}</div>
+<div class="color">{{ selectedColor?.description }} : {{ selectedColor?.price | currency }}</div>
+@if (towHitch) {
+  <div class="towHitch">Tow Hitch Package {{ 1000 | currency }}</div>
+}
+@if (yoke) {
+  <div class="yoke">Yoke Package {{ 1000 | currency }}</div>
+}
+<div class="total">TOTAL COST : {{ totalCost | currency }}</div>

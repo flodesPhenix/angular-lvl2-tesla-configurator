@@ -26,6 +26,8 @@ export class Step2Component implements OnInit {
 
   selectedConfig: TeslaOptionConfig | undefined;
   selectedConfigId: number | undefined;
+  towHitch: boolean | undefined;
+  yoke: boolean | undefined;
 
   private destroyedRef: DestroyRef = inject(DestroyRef);
   private router: Router = inject(Router);
@@ -39,6 +41,9 @@ export class Step2Component implements OnInit {
       if (this.selectedConfig) {
         this.selectedConfigId = this.selectedConfig.id;
       }
+
+      this.towHitch = this.teslaConfiguratorService.getTowHitch();
+      this.yoke = this.teslaConfiguratorService.getYoke();
 
       this.teslaInfosService.getOptionsById(this.selectedModel.code)
         .pipe(takeUntilDestroyed(this.destroyedRef))
@@ -58,5 +63,25 @@ export class Step2Component implements OnInit {
         this.teslaConfiguratorService.getStepToActivated().next(3);
       }
     }
+  }
+
+  checkTowHitch(): void {
+    if (!this.towHitch) {
+      this.towHitch = true;
+    } else {
+      this.towHitch = !this.towHitch;
+    }
+
+    this.teslaConfiguratorService.setTowHitch(this.towHitch);
+  }
+
+  checkYoke(): void {
+    if (!this.yoke) {
+      this.yoke = true;
+    } else {
+      this.yoke = !this.yoke;
+    }
+
+    this.teslaConfiguratorService.setYoke(this.yoke);
   }
 }

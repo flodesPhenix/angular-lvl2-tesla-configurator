@@ -17,13 +17,12 @@
     }
     @if (options.towHitch) {
       <div class="towHitch">
-        <input type="checkbox" id="towHitch"/> Too hitch ?
-<!--        <input type="checkbox" id="towHitch" [(ngModel)]="options.towHitch"/> Too hitch ?-->
+        <input type="checkbox" id="towHitch" (click)="checkTowHitch()" [(ngModel)]="towHitch"/> Too hitch ?
       </div>
     }
     @if (options.yoke) {
       <div class="yoke">
-        <input type="checkbox" id="yoke"/> Yoke steering wheel ?
+        <input type="checkbox" id="yoke" (click)="checkYoke()" [(ngModel)]="yoke" /> Yoke steering wheel ?
       </div>
     }
   </div>
