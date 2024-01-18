@@ -2,7 +2,7 @@
 @if (options) {
   <div class="form">
     <div class="config">
-      <select name="config" #config (change)="chooseAConfig(config.value)" [(ngModel)]="selectedConfigId">
+      <select #config [id]="selectedConfig" (change)="chooseAConfig(config.value)" [(ngModel)]="selectedConfigId">
         <option>Choose...</option>
         @for (config of options.configs; track config) {
           <option [value]="config.id">{{ config.description }}</option>
@@ -17,12 +17,12 @@
     }
     @if (options.towHitch) {
       <div class="towHitch">
-        <input type="checkbox" id="towHitch" (click)="checkTowHitch()" [(ngModel)]="towHitch"/> Too hitch ?
+        <input type="checkbox" id="includeYoke" (click)="checkTowHitch()" [(ngModel)]="towHitch"/> Too hitch ?
       </div>
     }
     @if (options.yoke) {
       <div class="yoke">
-        <input type="checkbox" id="yoke" (click)="checkYoke()" [(ngModel)]="yoke" /> Yoke steering wheel ?
+        <input type="checkbox" id="includeTow" (click)="checkYoke()" [(ngModel)]="yoke" /> Yoke steering wheel ?
       </div>
     }
   </div>

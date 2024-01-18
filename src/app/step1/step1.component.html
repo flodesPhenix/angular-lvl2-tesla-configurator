@@ -2,7 +2,7 @@
 <div class="form">
   <div class="model">
     <div class="libelle">Model
-      <select name="model" #model (change)="chooseAModel(model.value)" [(ngModel)]="selectedModelCode">
+      <select #model [id]="selectedModelCode" (change)="chooseAModel(model.value)" [(ngModel)]="selectedModelCode">
         <option>Choose...</option>
         @for (model of models; track model) {
           <option [value]="model.code">{{ model.description }}</option>
@@ -11,7 +11,7 @@
     </div>
     @if (selectedModel) {
       <div class="libelle">Color
-        <select name="color" #color (change)="chooseAColor(color.value)" [(ngModel)]="selectedColorCode">
+        <select #color [id]="selectedColorCode"  (change)="chooseAColor(color.value)" [(ngModel)]="selectedColorCode">
           @for (color of selectedModel.colors; track color) {
             <option [value]="color.code">{{ color.description }}</option>
           }

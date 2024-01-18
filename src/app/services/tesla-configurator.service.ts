@@ -30,6 +30,10 @@ export class TeslaConfiguratorService {
 
   public setSelectedModel(selectedModel: TeslaModel): void {
     this.selectedModel = selectedModel;
+    this.selectedOption = undefined;
+    this.selectedColor = undefined;
+    this.towHitch = undefined;
+    this.yoke = undefined;
     this.selectedModelSubject.next(selectedModel);
   }
 
