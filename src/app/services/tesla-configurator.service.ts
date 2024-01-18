@@ -15,6 +15,9 @@ export class TeslaConfiguratorService {
   private towHitch: boolean | undefined;
   private yoke: boolean | undefined;
 
+  private selectedModelSubject: Subject<TeslaModel> = new Subject<TeslaModel>();
+  private selectedColorSubject: Subject<TeslaModelColor> = new Subject<TeslaModelColor>();
+
   private stepToActivated: Subject<number> = new Subject<number>();
 
   public getStepToActivated(): Subject<number> {
@@ -27,6 +30,7 @@ export class TeslaConfiguratorService {
 
   public setSelectedModel(selectedModel: TeslaModel): void {
     this.selectedModel = selectedModel;
+    this.selectedModelSubject.next(selectedModel);
   }
 
   public getSelectedColor(): TeslaModelColor | undefined {
@@ -35,6 +39,15 @@ export class TeslaConfiguratorService {
 
   public setSelectedColor(selectedColor: TeslaModelColor): void {
     this.selectedColor = selectedColor;
+    this.selectedColorSubject.next(selectedColor);
+  }
+
+  public getSelectedModelSubject(): Subject<TeslaModel> {
+    return this.selectedModelSubject;
+  }
+
+  public getSelectedColorSubject(): Subject<TeslaModelColor> {
+    return this.selectedColorSubject;
   }
 
   public getSelectedOption(): TeslaOptionConfig | undefined {
