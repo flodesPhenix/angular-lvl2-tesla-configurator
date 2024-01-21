@@ -1,4 +1,4 @@
-import {Component, DestroyRef, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {TeslaConfiguratorService} from "../services/tesla-configurator.service";
 import {TeslaModel} from "../models/tesla-model";
 import {TeslaOptionConfig} from "../models/tesla-option-config";
